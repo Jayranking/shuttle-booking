@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Vehicle</title>
+    <%- include('../snippets/dashboard_headers.ejs') %>
+</head>
+<body class="sb-nav-fixed">
+    
+    <%- include('../snippets/dashboard_navbar.ejs') %>
+
+    <div id="layoutSidenav">
+        <%- include('../snippets/dashboard_sidebar.ejs') %>
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h4 class="mt-4 text-center text-success">MY VEHICLE</h4>
+                    <div class="text-end">
+                        <a href="/register-vehicle"><button class="btn btn-outline-primary fs-6 fw-bold"><i class="fas fa-plus"></i>Post Vehicle</button></a>
+                    </div>
+                    <table id="example" class="table table-striped mt-4" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Name/Model</th>
+                                <th>Plate Number</th>
+                                <th>Description</th>
+                                <th>Amount/km</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (context.vehicle) { %>
+                                <% context.vehicle.forEach(vehicle => { %>
+                                    <tr>
+                                        <td><%= vehicle.vehicle_model%></td>
+                                        <td><%= vehicle.plate_no %></td>
+                                        <td><%= vehicle.description %></td>
+                                        <td>₦<%= new Intl.NumberFormat().format(vehicle.amount) %></td>
+                                        <td class="d-flex">
+                                            <button class=" btn btn-sm btn-outline-primary me-2" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit"></i></button>
+                                            <button class=" btn btn-sm btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fas fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+
+
+            <%- include('../snippets/dashboard_footer.ejs') %>
+        </div>
+    </div>
+
+
+  <%- include('../snippets/dashboard_scripts.ejs') %>
+  <script>
+    new DataTable('#example');
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Book-Ride</title>
+    <%- include('./snippets/headers.ejs') %>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  </head>
+  <body>
+    <%- include('./snippets/navbar.ejs') %>
+    <div class="container-fluid driver">
+      <h4 class="text-center text-success mt-4 mb-4 fw-bold">Book Your Ride</h4>
+      <form action="" id="bookForm">
+        <div class="row">
+          <div class="col-lg-6 shadow">
+            <div class="card">
+              <div class="card-body">
+                <div class="row g-2 mb-4">
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Full name"
+                        name="full_name"
+                      />
+                      <label for="Ful name">Full name</label>
+                      <div class="full_nameErr text-danger text-center"></div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Phone Number"
+                        name="phone_no"
+                      />
+                      <label for="Phone Number">Phone Number</label>
+                      <div class="phone_noErr text-center text-danger"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-2 mb-4">
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="email"
+                        class="form-control"
+                        placeholder="Email"
+                        name="email"
+                      />
+                      <label for="Email">Email</label>
+                      <div class="emailErr text-center text-danger"></div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <select class="form-select" name="passenger">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                      <label for="floatingSelectGrid"
+                        >Number of Passangers</label
+                      >
+                    </div>
+                    <div class="passengerErr text-center text-danger"></div>
+                  </div>
+                </div>
+                <div class="row g-2 mb-4">
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="floatingInputGrid"
+                        placeholder="date"
+                        name="date"
+                      />
+                      <label for="floatingInputGrid">PickUp Date</label>
+                      <div class="dateErr text-center text-danger"></div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <select class="form-select" name="time">
+                        <option value="1">1:00</option>
+                        <option value="2">2:00</option>
+                        <option value="3">3:00</option>
+                        <option value="3">4:00</option>
+                        <option value="3">5:00</option>
+                        <option value="3">6:00</option>
+                        <option value="3">7:00</option>
+                        <option value="3">8:00</option>
+                        <option value="3">9:00</option>
+                        <option value="3">10:00</option>
+                        <option value="3">11:00</option>
+                        <option value="3">12:00</option>
+                        <option value="3">13:00</option>
+                        <option value="3">14:00</option>
+                        <option value="3">15:00</option>
+                        <option value="3">16:00</option>
+                        <option value="3">17:00</option>
+                        <option value="3">19:00</option>
+                        <option value="3">20:00</option>
+                        <option value="3">21:00</option>
+                        <option value="3">22:00</option>
+                        <option value="3">23:00</option>
+                        <option value="3">24:00</option>
+                      </select>
+                      <label for="floatingSelectGrid">PickUp Time</label>
+                      <div class="timeErr text-danger text-center"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="pickupLocation"
+                        placeholder="PickUp Location"
+                        name="location"
+                        readonly
+                      />
+                      <label for="pickupLocation">PickUp Location</label>
+                      <div class="locationErr text-center text-danger"></div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-floating">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="destination"
+                        placeholder="Destination"
+                        name="destination"
+                      />
+                      <label for="destination">Destination</label>
+                      <div class="destinationErr text-danger text-center"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center text-danger">
+                  <h6 id="distanceTime" class="mt-3"></h6>
+                </div>
+                <button class="btn btn-success w-100">Book Ride</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div id="map" style="height: 400px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      mapboxgl.accessToken =
+        "pk.eyJ1IjoiamF5cmFua2luZyIsImEiOiJjbHpuMHNhamwwZml0Mmlxd2V4b2pxMDU0In0.EBr3qDcgmiPHoure2GESeg"; // Replace with your Mapbox access token
+
+      document.addEventListener("DOMContentLoaded", function () {
+        let userLocation = null;
+
+        // Initialize the Mapbox map
+        const map = new mapboxgl.Map({
+          container: "map",
+          style: "mapbox://styles/mapbox/streets-v11",
+          center: [0, 0],
+          zoom: 2,
+        });
+
+        map.addControl(new mapboxgl.NavigationControl());
+
+        // Check if the browser supports Geolocation
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+              userLocation = [longitude, latitude];
+
+              map.setCenter(userLocation);
+              map.setZoom(12);
+
+              // Optionally, add a marker at the user's location
+              new mapboxgl.Marker().setLngLat(userLocation).addTo(map);
+
+              // Perform reverse geocoding to get the address
+              const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${mapboxgl.accessToken}`;
+
+              fetch(url)
+                .then((response) => response.json())
+                .then((data) => {
+                  const placeName =
+                    data.features[0]?.place_name || "Location not found";
+                  document.getElementById("pickupLocation").value = placeName;
+                })
+                .catch((error) =>
+                  console.error("Error with reverse geocoding:", error)
+                );
+            },
+            (error) => {
+              console.error("Error with geolocation:", error);
+              document.querySelector(".locationErr").textContent =
+                "Unable to retrieve your location.";
+            }
+          );
+        } else {
+          document.querySelector(".locationErr").textContent =
+            "Geolocation is not supported by this browser.";
+        }
+
+        // Event listener for destination input
+        const destinationInput = document.getElementById("destination");
+        destinationInput.addEventListener("input", function () {
+          const destination = destinationInput.value;
+
+          if (destination && userLocation) {
+            const destinationUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+              destination
+            )}.json?access_token=${mapboxgl.accessToken}`;
+
+            fetch(destinationUrl)
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.features.length > 0) {
+                  const destinationCoords =
+                    data.features[0].geometry.coordinates;
+
+                  // Calculate distance and time using the Mapbox Directions API
+                  const directionsUrl = `https://api.mapbox.com/directions/v5/mapbox/driving/${userLocation[0]},${userLocation[1]};${destinationCoords[0]},${destinationCoords[1]}?access_token=${mapboxgl.accessToken}&geometries=geojson`;
+
+                  fetch(directionsUrl)
+                    .then((response) => response.json())
+                    .then((data) => {
+                      if (data.routes.length > 0) {
+                        const route = data.routes[0];
+                        const distance = route.distance / 1000; // Convert to kilometers
+                        const duration = route.duration / 60; // Convert to minutes
+
+                        document.getElementById(
+                          "distanceTime"
+                        ).textContent = `Distance: ${distance.toFixed(
+                          2
+                        )} km, Duration: ${duration.toFixed(2)} mins`;
+                      } else {
+                        document.getElementById("distanceTime").textContent =
+                          "No route found";
+                      }
+                    })
+                    .catch((error) =>
+                      console.error("Error with directions API:", error)
+                    );
+                } else {
+                  document.getElementById("distanceTime").textContent =
+                    "Destination not found";
+                }
+              })
+              .catch((error) =>
+                console.error("Error with destination geocoding:", error)
+              );
+          }
+        });
+      });
+    </script>
+    <!-- javascript  -->
+    <%- include('./snippets/scripts.ejs') %>
+    <!-- ends  -->
+    <script src="/scripts/booking.js"></script>
+  </body>
+</html>

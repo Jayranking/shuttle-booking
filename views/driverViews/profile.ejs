@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Vehicle</title>
+    <%- include('../snippets/dashboard_headers.ejs') %>
+</head>
+<body class="sb-nav-fixed">
+    
+    <%- include('../snippets/dashboard_navbar.ejs') %>
+
+    <div id="layoutSidenav">
+        <%- include('../snippets/dashboard_sidebar.ejs') %>
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h4 class="mt-4 text-center text-success">MY Details</h4>
+                    <div class="container-fluid">
+                        <% if (context.driver) { %>
+                            <div class="card col-md-8 mx-auto mt-4 mb-5 shadow">
+                                <div class="card-body mb-5">
+                                    <div class="text-center">
+                                        <img src="/uploads/<%= context.driver.img %>" alt="" class="rounded-circle" height="100" width="100">
+                                    </div>
+                                    <div>
+                                        <input type="text" class="form-control mt-4" value="<%= context.driver.full_name %>" disabled>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <input type="text" class="form-control mt-2" value="<%= context.driver.username %>" disabled>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <input type="text" class="form-control mt-2" value="<%= context.driver.phone_no %>" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <input type="text" class="form-control mt-2" value="<%= context.driver.email %>"  disabled>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                            <input type="text" class="form-control mt-2" value="<%= context.driver.date %>" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                        
+                    </div>
+                </div>
+            </main>
+
+
+            <%- include('../snippets/dashboard_footer.ejs') %>
+        </div>
+    </div>
+
+
+  <%- include('../snippets/dashboard_scripts.ejs') %>
+  <script>
+    new DataTable('#example');
+  </script>
+
+</body>
+</html>

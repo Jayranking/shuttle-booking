@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Vehicle</title>
+    <%- include('../snippets/dashboard_headers.ejs') %>
+</head>
+<body class="sb-nav-fixed">
+    
+    <%- include('../snippets/dashboard_navbar.ejs') %>
+
+    <div id="layoutSidenav">
+        <%- include('../snippets/dashboard_sidebar.ejs') %>
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <div class="container col-7 mx-auto mt-5 mb-5">
+                        <div class="card">
+                            <div class="card-body shadow">
+                                <form action="" id="vehicleForm" enctype="multipart/form-data">
+                                    <h4 class="text-center text-success mb-2">REGISTER VEHICLE</h4>
+                                      <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingInput" placeholder="Vehicle name" name="vehicle_model">
+                                        <label for="floatingInput">Vehicle name/model</label>
+                                        <div class="vehicle_modelErr text-danger text-center"></div>
+                                      </div>
+                                      <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="floatingPassword" placeholder="Plate number" name="plate_no">
+                                        <label for="floatingPassword">Plate Number</label>
+                                        <div class="plate_noErr text-danger text-center"></div>
+                                      </div>
+                                      <div class="form-floating mb-3">
+                                        <input type="file" class="form-control" id="image" placeholder="Image" name="img">
+                                        <label for="floatingName">Image</label>
+                                        <div class="imageErr text-danger text-center"></div>
+                                    </div>
+                                      <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" placeholder="amount" name="amount" id="amountInput">
+                                        <label for="floatingPassword">Charge per KM(₦)</label>
+                                        <div class="amountErr text-danger text-center"></div>
+                                      </div>
+                                      <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Leave a comment here" name="description" id="floatingTextarea2" style="height: 100px"></textarea>
+                                        <label for="floatingTextarea2">Description</label>
+                                        <div class="descriptionErr text-danger text-center"></div>
+                                      </div>
+                                      <button type="submit" class="btn btn-success mt-4 w-100">Publish</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+
+            <%- include('../snippets/dashboard_footer.ejs') %>
+        </div>
+    </div>
+
+
+  <%- include('../snippets/dashboard_scripts.ejs') %>
+  <script src="/scripts/register_vehicle.js"></script>
+  <script>
+    const amountInput = document.getElementById('amountInput');
+  
+    amountInput.addEventListener('input', function (e) {
+      // Remove any existing commas and format the number
+      const value = e.target.value.replace(/,/g, ''); // Remove existing commas
+      if (!isNaN(value) && value.length > 0) {
+        e.target.value = new Intl.NumberFormat().format(value);
+      }
+    });
+  </script
+</body>
+</html>

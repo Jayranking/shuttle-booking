@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ticket</title>
+    <%- include('./snippets/headers.ejs') %>
+</head>
+<body>
+    <section class="mt-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <div class="card shadow">
+                <div class="card-body">
+                  <h2 class="text-center mb-4">Booking Confirmation</h2>
+                  <h5 class="mb-3">Your Booking Details</h5>
+                  <p><strong>Full Name:</strong> <%= booking.full_name %></p>
+                  <p><strong>Phone Number:</strong> <%= booking.phone_no %></p>
+                  <p><strong>Email:</strong> <%= booking.email %></p>
+                  <p><strong>Number of Passengers:</strong> <%= booking.passenger %></p>
+                  <p><strong>PickUp Date:</strong> <%= booking.date %></p>
+                  <p><strong>PickUp Time:</strong> <%= booking.time %></p>
+                  <p><strong>PickUp Location:</strong> <%= booking.location %></p>
+                  <p><strong>Destination:</strong> <%= booking.destination %></p>
+                  <p><strong>Estimated Distance & Time:</strong> <%= booking.distance_time %></p>
+                </div>
+              </div>
+      
+              <div class="card shadow mt-4">
+                <div class="card-body d-flex align-items-center">
+                  <img src="/uploads/<%= driver.img %>" alt="Driver Photo" class="driver-image rounded-pill mx-3" style="width: 100px; height: 100px; object-fit: cover;">
+                  <div class="driver-info">
+                    <h4 class="card-title"><%= driver.name %></h4>
+                    <p class="card-text"><strong>Plate Number:</strong> <%= driver.plate_number %></p>
+                    <p class="card-text"><strong>Vehicle Model:</strong> <%= driver.vehicle_model %></p>
+                    <p class="card-text"><strong>Amount/Km:</strong> ₦<%= driver.amount_per_km %></p>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="card shadow mt-4">
+                <div class="card-body">
+                  <h6 class="card-title text-center">Driver Contact Information</h6>
+                  <div class="d-flex justify-content-between">
+                    <p class="card-text"><i class="fas fa-phone"></i> <%= driver.phone %></p>
+                    <p class="card-text"><i class="fas fa-envelope"></i> <%= driver.email %></p>
+                  </div>
+                </div>
+              </div>
+      
+              <a href="/booking-history" class="btn btn-primary w-100 mt-4">View Booking History</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+   
+
+    <!-- javascript  -->
+    <%- include('./snippets/scripts.ejs') %>
+    <!-- ends  -->
+</body>
+</html>

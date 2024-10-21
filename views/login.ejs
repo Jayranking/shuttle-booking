@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <%- include('./snippets/headers.ejs') %>
+</head>
+<body>
+    <%- include('./snippets/navbar.ejs') %>
+    <div class="login_form-container">
+        <form action="" id="loginForm">
+            <h4 class="text-center text-success fw-bold mb-2">Login</h4>
+            <div class="form-floating mb-3 mt-3">
+                <input type="text" name="phone_no" class="form-control" id="floatingInput" placeholder="Phone Number">
+                <label for="floatingInput">Phone Number</label>
+                <div class="phone_noErr text-danger"></div>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+                <div class="passwordErr text-danger"></div>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100 fw-bold">Login</button>
+            <div class="text-center">
+                <p class="mt-2">Don't have an account? <a href="/register">Register here</a></p>
+            </div>
+        </form>
+    </div>
+    
+
+    <!-- javascript  -->
+    <%- include('./snippets/scripts.ejs') %>
+    <!-- ends  -->
+
+    <script src="/scripts/login.js"></script>
+</body>
+</html>

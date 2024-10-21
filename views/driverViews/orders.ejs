@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Orders</title>
+    <%- include('../snippets/dashboard_headers.ejs') %>
+</head>
+<body class="sb-nav-fixed">
+    
+    <%- include('../snippets/dashboard_navbar.ejs') %>
+
+    <div id="layoutSidenav">
+        <%- include('../snippets/dashboard_sidebar.ejs') %>
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h4 class="mt-4 text-center text-success">My Orders</h4>
+                    <table id="example" class="table table-striped mt-4" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Names of passangers</th>
+                                <th>Pickup Location</th>
+                                <th>Destination</th>
+                                <th>Amount</th>
+                                <th>Contact</th>
+                                <th>Date booked</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ani Godfrey</td>
+                                <td>Permanent site</td>
+                                <td>Abakaliki</td>
+                                <td>₦6000</td>
+                                <td>08135755963</td>
+                                <td>8/8/2024</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+
+
+            <%- include('../snippets/dashboard_footer.ejs') %>
+        </div>
+    </div>
+
+
+  <%- include('../snippets/dashboard_scripts.ejs') %>
+</body>
+</html>
